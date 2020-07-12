@@ -60,6 +60,8 @@ module BbbServer
 
   # Creates a meeting on the BigBlueButton server.
   def start_session(room, options = {})
+  logger.info "start_session: #{options[:maxParticipants]} maxParticipants"
+  logger.info "start_session: #{options[:duration]} duration"
     create_options = {
       record: options[:meeting_recorded].to_s,
       logoutURL: options[:meeting_logout_url] || '',
@@ -67,8 +69,10 @@ module BbbServer
       attendeePW: room.attendee_pw,
       moderatorOnlyMessage: options[:moderator_message],
       muteOnStart: options[:mute_on_start] || false,
-      duration: 5,
-      maxParticipants: 4,
+      # duration: 5,
+      duration: options[:duration] || 5,
+      # maxParticipants: 4,
+      maxParticipants: options[:maxParticipants] || 4,
       "meta_#{META_LISTED}": options[:recording_default_visibility] || false,
       "meta_bbb-origin-version": Greenlight::Application::VERSION,
       "meta_bbb-origin": "Greenlight",
