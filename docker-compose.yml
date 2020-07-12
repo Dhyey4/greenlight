@@ -33,3 +33,15 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=62596d1ba3e0ca7a
+
+  db-admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    depends_on:
+      - db
+    ports:
+      - "9898:80"
+    networks:
+      - backend
