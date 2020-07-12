@@ -60,8 +60,8 @@ module BbbServer
 
   # Creates a meeting on the BigBlueButton server.
   def start_session(room, options = {})
-  logger.info "start_session: #{options[:maxParticipants]} maxParticipants"
-  logger.info "start_session: #{options[:duration]} duration"
+  # logger.info "start_session: #{options[:maxParticipants]} maxParticipants"
+  # logger.info "start_session: #{options[:duration]} duration"
     create_options = {
       record: options[:meeting_recorded].to_s,
       logoutURL: options[:meeting_logout_url] || '',
