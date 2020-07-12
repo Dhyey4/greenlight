@@ -43,5 +43,3 @@ services:
       - db
     ports:
       - "9898:80"
-    networks:
-      - backend
