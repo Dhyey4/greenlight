@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Contact-Us
+{% endblock title %}
+{% block content %}
+<!-- Contanct Section -->
+
+
+
+<div class="contact-section p50-0">
+    <div class="container">
+        <div class="row"> 
+         <div class="offset-lg-3  col-lg-6 offset-lg-0 col-md-6 col-sm-6 mtop30">
+            <div style="text-align: center;">
+            <h2>Contact Us</h2>
+            <h6>Please provide the following information and we'll get back to you with a resolution within the next 2 business days.</h6><br>
+            </div>
+             <div class="contact-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Full Name *" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="email" class="form-control" placeholder="Email *" id="email" name="email" required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Phone number *" id="pnumber" name="pnumber" required="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Company *" id="cname" name="cname" required="">
+                    </div>
+                    <div class="form-group">
+                        <p>Level of priority *</p>
+                          <input type="radio" id="low" name="priority" value="low">
+                          <label for="low">Low</label><br>
+                          <input type="radio" id="moderate" name="priority" value="moderate">
+                          <label for="moderate">Moderate</label><br>
+                          <input type="radio" id="high" name="priority" value="high">
+                          <label for="high">High</label>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" id="address" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <select id="issue" name="issue" required="">
+                            <option>Select the issue *</option>
+                            <option value="Video Connectivity">Video Connectivity</option>
+                            <option value="Log-in & sign-up">Log-in & sign-up</option>
+                            <option value="Audio connection">Audio connection</option>
+                            <option value="Payment/Account issues">Payment/Account issues</option>
+                            <option value="Functionality (webinar features)">Functionality (webinar features)</option>
+                            <option value="Functionality (video conferencing)">Functionality (video conferencing)</option>
+                            <option value="Functionality (group collaboration)">Functionality (group collaboration)</option>
+                            <option value="Functionality (file sharing)">Functionality (file sharing)</option>
+                            <option value="Accessibility features">Accessibility features</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="message" placeholder="Provide us any further information you think is important"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="accept" value="accept">
+                        <label for="accept">I opt-in to receive marketing,promotional materials</label>
+                    </div>
+                    <div class="form-group" style="text-align: center;">
+                        <!-- <input type="submit" value="submit"> -->
+                        <button class="btn btn-success" id="contact_us">Submit</button>
+                    </div>
+                
+             </div>
+         </div> 
+        </div>   
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#contact_us').click(function(){
+            // alert("meet");
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var phone_number = $('#pnumber').val();
+            var company = $('#cname').val();
+            var priority = $("input[name='priority']:checked").val();
+            var address = $('#address').val();
+            var issue = $('#issue').val();
+            var message = $('#message').val();
+
+            if (email == '' || name == '' || phone_number == '' || company == '' || priority == '' || issue == ''){
+                alert("Fill All Required Fields..")
+            }
+            else{
+
+                $.ajax({
+                    // url:'{% url "wofemtech:SendContactUsMail" %}',
+                    url : '/api/SendContactUsMail/',
+                    type:'post',
+                    data:{'name':name,'email':email,'message':message,'phone_number':phone_number,'company':company,'priority':priority,'address':address,'issue':issue,'csrfmiddlewaretoken': '{{ csrf_token }}',},
+
+                    success: function(data){
+                        if (data.code == 200){
+                            alert(data.msg);
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Meetings
+{% endblock title %}
+{% block content %}
+<!-- Banner Section -->
+<section class="banner-section p100-0" style="background-image: url(/static/images/meetings_banner.png);">
+    <div class="container">
+        <div class="p30-0 features-banner-content col-lg-6 offset-lg-6 col-md-7 offset-md-5 col-sm-7 offset-sm-5">
+            <div class="banner-content">
+                <h1>Host your next <br> seminar or conference with us.</h1>
+            </div>
+            <div class="pt30">
+                {% if request.user.is_authenticated %}
+            <a href="{{link}}" class="button btn-green">Create Meetings!</a>
+            {% else %}
+            <a href="/register" class="button btn-green">Try Now</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Two Column Section -->
+<section class="p50-0">
+    <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-sm-6 ">
+                    <img src="/static/images/CREATE A MEETING TODAY.png">   
+                </div>  
+                <div class="col-lg-5 col-sm-6 offset-lg-1 mtop30">
+                    <h6><b>CREATE A MEETING TODAY</b></h6>
+                    <h2>Sign-Up For A Trial</h2>
+                    <p>Connect with your team and clients today using our cloud-based video conferencing platforms with webinar functions for your next town hall or community workshop.</p>
+                    <div class="pt30">
+                        <a href="http://meeting.wofemtech.com/b" target="_blank" class="button btn-green">Learn more</a>
+                    </div>
+                </div>   
+            </div>   
+    </div>
+</section>
+<section class="p50-0 greenBg ">
+    <div class="container">
+        <div class="offset-lg-2 col-lg-8 offset-lg-2 col-md-12 offset-md-0">
+            <h3>Events & Conferences</h3>
+            <p>Host your next event or summit using the Wofemtech platforms to create a simple to user and smooth experience for your speakers and participants.</p>
+            <p><a href="http://meeting.wofemtech.com/b" style="color: #000000;"><b>Learn more</b></a></p>
+        </div>
+    </div>
+</section>
+<section class="p50-0">
+    <div class="container">
+        <img src="/static/images/Conferences.png">
+    </div>
+</section>
+<section class="p50-0">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-sm-6 ">
+                <img src="/static/images/CREATE YOUR ACCOUNT.png">   
+            </div> 
+            <div class="col-lg-5 col-sm-6 offset-lg-1 mtop30">
+                <h6 class="text-uppercase"><b>CREATE YOUR ACCOUNT</b></h6>
+                <h2>Wofemtech Platform</h2>
+                <p>Start recording your first meeting using a 14-day trial to test out - a new way to meeting virtually. View all created meetings and meeting recordings on the home page dashboard. After recording your meeting send a copy via email from your account dashboard.</p>
+                <div class="pt30">
+                    <a href="http://meeting.wofemtech.com/b" target="_blank" class="button btn-green">Learn more</a>
+                </div>
+            </div>
+        </div>   
+    </div>
+</section>
+
+{% endblock %}

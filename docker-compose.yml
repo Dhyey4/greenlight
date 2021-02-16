@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     entrypoint: [bin/start]
-    image: dhyey:release-v2
+    image: greenlight_local:release-v2
     container_name: greenlight-v2
     env_file: .env
     restart: unless-stopped
@@ -22,6 +22,9 @@ services:
 # When using postgresql as the database
     links:
       - db
+    networks:
+      - backend
+
   db:
     image: postgres:9.5
     restart: unless-stopped
@@ -30,9 +33,11 @@ services:
     volumes:
       - ./db/production:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=greenlight_production
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=62596d1ba3e0ca7a
+      - POSTGRES_PASSWORD=6f4d548618737994
+    networks:
+      - backend
 
   db-admin:
     image: dpage/pgadmin4
@@ -43,3 +48,24 @@ services:
       - db
     ports:
       - "9898:80"
+    networks:
+      - backend
+
+  wofemtech:
+    build:
+      dockerfile: Dockerfile_Wofemtech
+      context: .
+    restart: unless-stopped
+    volumes:
+      - ./wofemtech:/code
+    command: python3 manage.py runserver 0.0.0.0:9933
+    links:
+      - db
+    ports:
+      - "9933:9933"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

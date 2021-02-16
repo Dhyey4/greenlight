@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Tutorials
+{% endblock title %}
+{% block content %}
+<!-- Banner Section -->
+<section class="contact-banner-section fontWhite">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 leftImage">
+                <img src="/static/images/tutorials_banner.jpg">
+            </div>
+            <div class="col-lg-6 col-md-6 text-center p100-0">
+                  <div class="p60-0">
+                    <h1>Start hosting meetings and webinars today.</h1>  
+                    <div class="pt30">
+                      {% if request.user.is_authenticated %}
+                        <a href="{{link}}" class="button btn-green">Create Meetings!</a>
+                        {% else %}
+                        <a href="{{link}}" class="button btn-green">Try Now</a>
+                        {% endif %}
+                    </div>
+                  </div>   
+            </div>    
+        </div>
+    </div>
+</section>
+<!-- Tutorials -->
+<section class="tutorials-section p50-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center font16">
+                <h2>Tutorials</h2>
+                <p>Learn how to use our video conferencing platform with the support of our tutorial guides.</p>
+                <div class="pt30">
+                    <a class="button" href="/static/pdf/How To Create A Meeting - Wofemtech.pdf" target="_blank" >Download</a>
+                </div>
+                <div class="pdf-viewer pt50">
+                    <embed class="pdfobject" src="/static/pdf/How To Create A Meeting - Wofemtech.pdf" type="application/pdf" style="overflow: auto; width: 100%; height: 650px;">
+                </div>
+            </div>
+        </div> 
+        <div class="row pt50">
+            <div class="col-lg-12 text-center font16">
+                <h2>How To Join A Meeting</h2>
+                <p>When hosting a meeting using Wofemtech share this guide with your meeting attendees.</p>
+                <div class="pt30">
+                    <a class="button" href="/static/pdf/How%20To%20Join%20A%20Meeting%20-%20Wofemtech2.pdf" target="_blank" >Download</a>
+                </div>
+                <div class="pdf-viewer pt50">
+                    <embed class="pdfobject" src="/static/pdf/How To Join A Meeting - Wofemtech2.pdf" type="application/pdf" style="overflow: auto; width: 100%; height: 650px;">
+                </div>
+            </div>
+        </div>    
+    </div>
+</section>
+{% endblock %}

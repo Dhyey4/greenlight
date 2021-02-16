@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Payment-Success
+{% endblock title %}
+{% block content %}
+<section>
+ <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 paymentCard col-sm-12 col-xs-12  text-center p-5 mb-5">
+                <div class="col">
+                    <img src="static/images/check.png" alt="Successfully" srcset="">
+                </div>
+                <div class="col my-4">
+                    <strong>Order Completed Successfully!</strong>
+                </div>
+                <div class="col">
+                    <p>Your Order was Successfully Processed.</p>
+                    <p class="mt-0">Check your email for your Receipt.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

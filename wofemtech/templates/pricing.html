@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% load filter_tags %}
+{% load static %}
+{% block title %}
+    Pricing
+{% endblock title %}
+{% block content %}
+<!-- Banner Section -->
+<section class="banner-section fontWhite pricing_banner p100-0" style="background-image: url(/static/images/pricing_banner.jpg);">
+<div class="container">
+    <div class="p60-0">
+        <div class="banner-content">
+            <h1>Flexible business <br> meeting plans for you.</h1>
+        </div>
+        <div class="pt30">
+            {% if request.user.is_authenticated %}
+            <a href="{{link}}" class="button btn-green">Create Meetings!</a>
+            {% else %}
+            <a href="/register" class="button btn-green">Sign-Up</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</section>
+<!-- Two Column Section -->
+<section class="p50-0">
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 col-sm-6 ">
+            <img src="/static/images/ENGAGE WITH YOUR CLIENTS.png">   
+        </div> 
+        <div class="col-lg-5 col-sm-6 offset-lg-1 mtop30">
+            <h6 class="text-uppercase"><b>ENGAGE WITH YOUR CLIENTS</b></h6>
+            <h2>Business Meeting Plans</h2>
+            <p>Host stress-free virtual meetings on a secure, sleek-designed web conferencing platform with HD video & audio quality. Give your meeting the quality it deserves.</p>
+            <div class="pt30">
+                <a href="http://meeting.wofemtech.com/b" target="_blank" class="button btn-green">Learn more</a>
+            </div>
+        </div>
+    </div>   
+</div>
+</section>
+<!-- Business Meeting Plans -->
+<section class="pricing-section p70-0">
+<div class="container">
+    <div class="row">
+        {% for p in products %}
+        <div class="col-lg-4 col-md-4 col-sm-4 mtop30">
+                <div class="price-card">
+                    <a href="javascript:void(0);" data-fancybox data-src="#price-popup{{p.id}}" class="popup-open"></a>
+                    <div class="card-icon">
+                        {% for a in p.images %}
+                        <img class="card-icon" src="{{a}}">
+                        {% endfor %}
+                        <!-- <img class="card-icon" src="https://stripe-camo.global.ssl.fastly.net/ef3cc963a52b47e5f73a7c7b77ece885d5b883d1/68747470733a2f2f66696c65732e7374726970652e636f6d2f6c696e6b732f666c5f746573745f715145366c784d35516f41654e795859393139646e393836"> -->
+                        <!-- <svg id="" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M23 15a1 1 0 100 2v-2zm10 2a1 1 0 100-2v2zm-10 2a1 1 0 100 2v-2zm7 2a1 1 0 100-2v2zm-7 2a1 1 0 100 2v-2zm8 2a1 1 0 100-2v2zm-15.392.51a1 1 0 001.585-1.22l-1.585 1.22zm-9-1.22a1 1 0 001.585 1.22l-1.585-1.22zM37 32H3v2h34v-2zM3 32c-.548 0-1-.452-1-1H0c0 1.652 1.348 3 3 3v-2zm-1-1V9H0v22h2zM2 9c0-.548.452-1 1-1V6C1.348 6 0 7.348 0 9h2zm1-1h34V6H3v2zm34 0c.548 0 1 .452 1 1h2c0-1.652-1.348-3-3-3v2zm1 1v22h2V9h-2zm0 22c0 .548-.452 1-1 1v2c1.652 0 3-1.348 3-3h-2zM23 17h10v-2H23v2zm0 4h7v-2h-7v2zm0 4h8v-2h-8v2zm-9.1-7a2 2 0 01-2 2v2a4 4 0 004-4h-2zm-2 2a2 2 0 01-2-2h-2a4 4 0 004 4v-2zm-2-2a2 2 0 012-2v-2a4 4 0 00-4 4h2zm2-2a2 2 0 012 2h2a4 4 0 00-4-4v2zm5.293 8.29c-1.184-1.539-3.173-2.59-5.293-2.59v2c1.48 0 2.891.748 3.708 1.81l1.585-1.22zM11.9 21.7c-2.12 0-4.109 1.051-5.292 2.59l1.585 1.22c.816-1.062 2.227-1.81 3.707-1.81v-2z" fill="var(--icon-fill)"></path></svg></svg> -->
+                    </div>
+                    <div class="card-price">
+                        <div class="price">
+                            <h2>{{p.description}}</h2>    
+                        </div>
+                        <div class="planid" style="display: none;">
+                            <h2 id="planid"> {{p.id}}</h2>
+                        </div>
+                        <div class="card-title pt20">
+                            <p>{{p.name}}</p>
+                        </div>
+                        <div class="card-btn pt20">
+                            <a  class="button btn-green sub" data-toggle="modal" data-target="#myModal">Select</a>
+                        </div>
+                    </div>
+                    <div class="card-features">
+                        {% with description|get_item:p.id|split:"," as tags %}
+                            {% for tag in tags %}
+                            <ul><li>{{ tag }}</li></ul>
+                            {% endfor %}
+                        {% endwith %}
+                        
+                    </div>    
+                </div>
+        </div>
+
+<!-- popup code -->
+
+<div id='price-popup{{p.id}}' class="price-popup" style="display: none;">
+<div class="price-popup-inner">
+    <h2 class="product_id" id="product_id" style="display: none;">{{p.id}}</h2>
+    <h2 class="plan_id" id="plan_id" style="display: none;">asd</h2>
+    <h2 id="planname"><strong>{{p.name}}</strong></h2>
+    <h2><b>{{p.description}}</b></h2>
+    <div class="pt20">
+    <p>Billed</p>
+    <select id="plan1" name="plan" class="plan1">
+        <option selected disabled>Select One</option>
+        {% for plan in p.plan_set.all %}
+        <option value="{{ plan.id }}">{{ plan.human_readable_price }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="pt20 price-popup-content">
+        {% with description|get_item:p.id|split:"," as tags %}
+            {% for tag in tags %}
+            <ul><li>{{ tag }}</li></ul>
+            {% endfor %}
+        {% endwith %}
+    </div>
+</div>
+<div class="price-popup-bottom">
+    <form>
+        <div class="row">
+        <!-- <div class="col-lg-3 col-md-3 col-sm-6"> -->
+            <!-- <div class="popup-value" id="counter"> -->
+                <!-- <button class="btn-minus" id="minus">-</button> -->
+                <!-- <input type="number" placeholder="0" value="1" min='1' max='11' class="total-item" id="quantity" name="quantity"> -->
+                <!-- <button class="btn-plus" id="plus">+</button> -->
+            <!-- </div> -->
+        <!-- </div> -->
+        <div class="col-lg-12 col-md-12 col-sm-12 mtop20">
+            <a class="button btn-green amount" id="amount">Join/Renew</a>
+            
+        </div>
+        </div>
+    </form>
+</div>
+</div>
+        {% endfor %}
+        <!-- <div class="col-lg-4 col-md-4 col-sm-4 mtop30">
+            <div class="price-card">
+                <a href="javascript:void(0);" data-fancybox data-src="#price-popup2" class="popup-open"></a>
+                <div class="card-icon">
+                    <svg id="" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M23 15a1 1 0 100 2v-2zm10 2a1 1 0 100-2v2zm-10 2a1 1 0 100 2v-2zm7 2a1 1 0 100-2v2zm-7 2a1 1 0 100 2v-2zm8 2a1 1 0 100-2v2zm-15.392.51a1 1 0 001.585-1.22l-1.585 1.22zm-9-1.22a1 1 0 001.585 1.22l-1.585-1.22zM37 32H3v2h34v-2zM3 32c-.548 0-1-.452-1-1H0c0 1.652 1.348 3 3 3v-2zm-1-1V9H0v22h2zM2 9c0-.548.452-1 1-1V6C1.348 6 0 7.348 0 9h2zm1-1h34V6H3v2zm34 0c.548 0 1 .452 1 1h2c0-1.652-1.348-3-3-3v2zm1 1v22h2V9h-2zm0 22c0 .548-.452 1-1 1v2c1.652 0 3-1.348 3-3h-2zM23 17h10v-2H23v2zm0 4h7v-2h-7v2zm0 4h8v-2h-8v2zm-9.1-7a2 2 0 01-2 2v2a4 4 0 004-4h-2zm-2 2a2 2 0 01-2-2h-2a4 4 0 004 4v-2zm-2-2a2 2 0 012-2v-2a4 4 0 00-4 4h2zm2-2a2 2 0 012 2h2a4 4 0 00-4-4v2zm5.293 8.29c-1.184-1.539-3.173-2.59-5.293-2.59v2c1.48 0 2.891.748 3.708 1.81l1.585-1.22zM11.9 21.7c-2.12 0-4.109 1.051-5.292 2.59l1.585 1.22c.816-1.062 2.227-1.81 3.707-1.81v-2z" fill="var(--icon-fill)"></path></svg></svg>
+                </div>
+                <div class="card-price">
+                    <div class="price">
+                        <h2>CAD$30 - CAD$35</h2>    
+                    </div>
+                    <div class="card-title pt20">
+                        <p>Pro - Small Teams</p>
+                    </div>
+                    <div class="card-btn pt20">
+                        <a  class="button btn-green sub">Select</a>
+                    </div>
+                </div>
+                <div class="card-features">
+                    <p>All LITE Features +</p>
+                    <ul><li>Host up to 150 participants</li><li>Meeting duration 3 hrs</li><li>User Management&nbsp;</li><li>5 recordings (deletes after 14 days)</li><li>Video Conferencing Features</li><li>Webinar Features</li><li>Reporting Updates</li><li>Ticket Support&nbsp;</li><li>6 Breakout rooms</li></ul>    
+                </div>    
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 mtop30">
+                <div class="price-card">
+                    <a href="javascript:void(0);" data-fancybox data-src="#price-popup3" class="popup-open"></a>
+                    <div class="card-icon">
+                        <svg id="" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M23 15a1 1 0 100 2v-2zm10 2a1 1 0 100-2v2zm-10 2a1 1 0 100 2v-2zm7 2a1 1 0 100-2v2zm-7 2a1 1 0 100 2v-2zm8 2a1 1 0 100-2v2zm-15.392.51a1 1 0 001.585-1.22l-1.585 1.22zm-9-1.22a1 1 0 001.585 1.22l-1.585-1.22zM37 32H3v2h34v-2zM3 32c-.548 0-1-.452-1-1H0c0 1.652 1.348 3 3 3v-2zm-1-1V9H0v22h2zM2 9c0-.548.452-1 1-1V6C1.348 6 0 7.348 0 9h2zm1-1h34V6H3v2zm34 0c.548 0 1 .452 1 1h2c0-1.652-1.348-3-3-3v2zm1 1v22h2V9h-2zm0 22c0 .548-.452 1-1 1v2c1.652 0 3-1.348 3-3h-2zM23 17h10v-2H23v2zm0 4h7v-2h-7v2zm0 4h8v-2h-8v2zm-9.1-7a2 2 0 01-2 2v2a4 4 0 004-4h-2zm-2 2a2 2 0 01-2-2h-2a4 4 0 004 4v-2zm-2-2a2 2 0 012-2v-2a4 4 0 00-4 4h2zm2-2a2 2 0 012 2h2a4 4 0 00-4-4v2zm5.293 8.29c-1.184-1.539-3.173-2.59-5.293-2.59v2c1.48 0 2.891.748 3.708 1.81l1.585-1.22zM11.9 21.7c-2.12 0-4.109 1.051-5.292 2.59l1.585 1.22c.816-1.062 2.227-1.81 3.707-1.81v-2z" fill="var(--icon-fill)"></path></svg></svg>
+                    </div>
+                    <div class="card-price">
+                        <div class="price">
+                            <h2>CAD$40 - CAD$45</h2>    
+                        </div>
+                        <div class="card-title pt20">
+                            <p>Business - Small & Med Businesses</p>
+                        </div>
+                        <div class="card-btn pt20">
+                            <a  class="button btn-green sub">Select</a>
+                        </div>
+                    </div>
+                    <div class="card-features">
+                            <p>All PRO Features+</p>
+                            <ul><li>Host up to 300 Meeting Participants</li><li>Meeting Durations Limit 5 hrs</li><li>Unlimited Number of Monthly Meetings</li><li>8 Meeting Recordings (deleted after 20 days)</li><li>10 Breakout Rooms</li><li>Dedicated Phone Support</li><li>Reporting Updates</li><li>Video Conferencing Features</li><li>Webinar Features</li><li>Group Collaboration Features</li><li>Secure Socket Layer (SSL) encryption</li><li>AES 256 bits encryption</li></ul>   
+                    </div>    
+                </div>
+        </div>
+    </div>     
+</div> -->
+</section>
+
+
+<section class="p50-0 greenBg text-center">
+<div class="container">
+    <div class="font31">
+        <h6><b>CUSTOMIZATION</b></h6>
+        <p>We take pride in delivering exceptional quality <br> for our web conferencing platform and <br> services. View our corporate meeting plan.</p>
+    </div>
+</div>
+</section>
+
+<section class="p50-0">
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 col-sm-6 ">
+            <img src="/static/images/Corporate Plan.png">   
+        </div> 
+        <div class="col-lg-6 col-sm-6 font16 mtop30">
+            <h6 class="text-uppercase"><b>ENTERPRISE-READY</b></h6>
+            <h2>Corporate Plan</h2>
+            <ul><li><span style="color:#242725">All Businesses Features+</span></li><li><span style="color:#242725">Host up to 400 - 500 Meeting Participants</span></li><li><span style="color:#242725">100 GB Cloud Storage Recording</span></li><li><span style="color:#242725">15 Breakout Rooms</span></li><li><span style="color:#242725">User Management&nbsp;Administrator Access</span></li><li><span style="color:#242725">Assigned Sales Representative&nbsp;</span></li><li><span style="color:#242725">Company Branding &amp; Customization</span></li><li><span style="color:#242725">Meeting Durations Limit 5 hrs</span></li><li><span style="color:#242725">Unlimited Number of Monthly Meetings</span></li><li><span style="color:#242725">8 Meeting Recordings (deleted after 20 days)</span></li><li><span style="color:#242725">10 Breakout Rooms</span></li><li><span style="color:#242725">Dedicated Phone Support</span></li><li><span style="color:#242725">Reporting Updates</span></li><li><span style="color:#242725">Video Conferencing Features</span></li><li><span style="color:#242725">Webinar Features</span></li><li><span style="color:#242725">Group Collaboration Features</span></li><li><span style="color:#242725"> Secure Socket Layer (SSL) encryption</span></li><li><span style="color:#242725">AES 256 bits encryption</span></li></ul>
+            <div class="pt30">
+                <a href="http://meeting.wofemtech.com/b" target="_blank" class="button btn-green">Learn more</a>
+            </div>
+        </div>   
+    </div>   
+</div>
+</section>
+
+
+<!-- Pricing Popup plan1-->
+{% for p in products %}
+
+
+{% endfor %}
+
+<!-- Pricing Popup plan2-->
+<!-- <div id='price-popup2' class="price-popup" style="display: none;">
+<div class="price-popup-inner">
+    <h2 id="planname2">Pro - Small Teams</h2>
+    <h2><b>$30.00 - $35.00</b></h2>
+    <div class="pt20">
+    <p>Billed Pro</p>
+    <select id="plan2">
+        <option selected disabled>Select One</option>
+        <option value="35">$35.00/month/host up to 9 hosts</option>
+        <option value="360">$360.00/year/host up to 9 hosts</option>
+    </select>
+    </div>
+    <div class="pt20 price-popup-content">
+        <p>Description</p>
+        <p>All LITE Features +</p>
+        <ul>
+            <li>Host up to 150 participants</li>
+            <li>Meeting duration 3 hrs</li>
+            <li>User Management </li>
+            <li>5 recordings (deletes after 14 days)</li>
+            <li>Video Conferencing Features</li>
+            <li>Webinar Features</li>
+            <li>Reporting Updates</li>
+            <li>Ticket Support</li>
+            <li>6 Breakout rooms</li>
+        </ul>
+    </div>
+</div>
+<div class="price-popup-bottom">
+    <form>
+        <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="popup-value" id="counter2">
+                <button class="btn-minus btn2-minus">-</button>
+                <input type="number" placeholder="0" value="1" min='1' class="total-item" id="quantity2" name="quantity">
+                <button class="btn-plus btn2-plus">+</button>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-6 mtop20">
+            <a  class="button btn-green" id="amount2">Join/Renew</a>
+        </div>
+        </div>
+    </form>
+</div>
+</div> -->
+
+
+<!-- Pricing Popup plan3-->
+<!-- <div id='price-popup3' class="price-popup" style="display: none;">
+<div class="price-popup-inner">
+    <h2 id="planname3">Business - Small & Med Businesses</h2>
+    <h2><b>$40.00 - $45.00</b></h2>
+    <div class="pt20">
+    <p>Business</p>
+    <select id="plan3">
+        <option selected disabled>Select One</option>
+        <option value="450">$450.00/month/hosts starting at 10 hosts</option>
+        <option value="5400">$5400.00/year/hosts starting at 10 hosts</option>
+    </select>
+    </div>
+    <div class="pt20 price-popup-content">
+        <p>Description</p>
+        <p>All PRO Features+</p>
+        <ul>
+            <li>Host up to 300 Meeting Participants</li>
+            <li>Meeting Durations Limit 5 hrs</li>
+            <li>Unlimited Number of Monthly Meetings</li>
+            <li>8 Meeting Recordings (deleted after 20 days)</li>
+            <li>10 Breakout Rooms</li>
+            <li>Dedicated Phone Support</li>
+            <li>Reporting Updates</li>
+            <li>Video Conferencing Features</li>
+            <li>Webinar Features</li>
+            <li>Group Collaboration Features</li>
+            <li>Secure Socket Layer (SSL) encryption</li>
+            <li>AES 256 bits encryption</li>
+        </ul>
+    </div>
+</div>
+<div class="price-popup-bottom">
+    <form>
+        <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="popup-value" id="counter3">
+                <button class="btn-minus btn3-minus">-</button>
+                <input type="number" placeholder="0" value="1" min='1' class="total-item" id="quantity3" name="quantity">
+                <button class="btn-plus btn3-plus">+</button>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-6 mtop20">
+            <a class="button btn-green" id="amount3">Join/Renew</a>
+        </div>
+        </div>
+    </form>
+</div>
+</div>
+ -->
+{% endblock %}

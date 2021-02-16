@@ -1,0 +1,433 @@
+{% load static %}
+{% with link="https://meeting.wofemtech.com/b/signin" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Home{% endblock title %}</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" ></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-loading-overlay/2.1.7/loadingoverlay.min.js" integrity="sha512-hktawXAt9BdIaDoaO9DlLp6LYhbHMi5A36LcXQeHgVKUH6kJMOQsAtIw2kmQ9RERDpnSTlafajo6USh9JUXckw==" crossorigin="anonymous"></script>
+
+{% block head %}
+{% endblock %}
+</head>
+<body>
+<!-- Header Section -->
+<header>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-2">
+                <div class="site-logo">
+                    <a href="/">
+                        <img src="/static/images/WofemtechLOGO.png" width="120">
+                    </a>
+                </div>    
+            </div>
+            <div class="col-xl-10">
+                <div class="navigation noListStyle">
+                    <span id="close-icon" style="display: none;" ><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="1.872" height="20.587" rx=".936" transform="scale(.99243 1.00751) rotate(45 4.622 24.714)" fill="var(--icon-fill)"></rect><rect width="1.872" height="20.587" rx=".936" transform="matrix(-.70176 .71242 .70176 .71242 5.313 4)" fill="var(--icon-fill)"></rect></svg></span>
+                        <ul>
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/features">Features</a>
+                        </li>
+                        <li>
+                            <a href="/pricing">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="/meetings">Meetings</a>
+                        </li>
+                        <li>
+                            <a href="/teams">Team</a>
+                        </li>
+                        <li>
+                            <a href="/tutorials">Tutorials</a>
+                        </li>
+                        <li>
+                            <a href="/contact-us">Contact Us</a>
+                        </li>
+                        
+                        <li>
+                        	{% if request.user.is_authenticated %}
+                            <!-- <li class="dropdown"> -->
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user-circle-o " aria-hidden="true"></i>
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li style="margin-top: 10px;"><i class="fa fa-address-card-o" aria-hidden="true"></i> <a href="/profile"> Profile</a></li><br><hr>
+                              <li style="margin-bottom: 10px;"><i class="fa fa-sign-out" aria-hidden="true"></i> <a href="/logout"> Logout</a></li>
+                            </ul>
+                            <!-- </li> -->
+                        	{% else %}
+                            <!-- <li> -->
+                        	<a href="/login">Log In</a>
+                        <!-- </li> -->
+                        	{% endif %}
+                        </li>
+                        <li>
+                            <a href="/demo">Demo</a>
+                        </li>
+                        
+                    </ul>     
+                </div>
+
+                <div class="cart-wrapper">
+                    <a href="javascript:void(0);">
+                        <svg id="cart-icon" width='24px' height='24px' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" fill="#000" clip-rule="evenodd" d="M2 2a1 1 0 000 2H3.58c.08 0 .1.017.124.038.047.041.123.139.207.34.083.199.15.438.215.713l.058.257c.043.192.09.402.134.564.126.455.757 2.582 1.351 4.574l.806 2.697.153.514a2.744 2.744 0 00-.106.111c-.43.476-.784 1.204-.784 2.238 0 .874.428 1.618.99 2.123.559.502 1.318.831 2.115.831H9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3H19.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3H21.999L22 18v1a1 1 0 100-2v0H8.841c-.255 0-.549-.113-.78-.32-.227-.203-.325-.436-.325-.634 0-.54.172-.79.268-.897a.707.707 0 01.074-.071l12.614-.712a1 1 0 00.928-.824l1.364-7.721A1 1 0 0022 4.647H6.075l-.004-.015a6.572 6.572 0 00-.316-1.025c-.146-.35-.368-.749-.726-1.066A2.142 2.142 0 003.579 2H2v1-1zm5.585 7.915c-.351-1.177-.71-2.384-.97-3.268h14.193l-1.019 5.767-11.268.636-.131-.44-.805-2.695z"></path></svg>
+                    </a>   
+                </div>    
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+{% block content %}
+
+{% endblock %}
+<!-- Footer Section -->
+<footer>
+    <div class="container">
+        <div class="p50-0 text-center">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Stay in the Loop</h2>
+                    <div class="font16 pt15">
+                        <p>Be the first to know about news, updates and promos.</p>
+                    </div>
+                    <div class="footer-form pt15">
+                        <form>
+                            <input type="email" name="email" class="hs-input" placeholder="Email">
+                            <input type='submit' value="Sign Up" class="hs-submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom p50-0">
+        <div class="container">
+            <div class="row align-items-center pb50">
+                <div class="col-lg-6 col-sm-12 mobile-center">
+                    <h2 class="web-link"><a href="https://www.wofemtech.com/">Wofemtech Solutions Inc.</a></h2>
+                </div>
+                <div class="col-lg-6 col-sm-12 text-right mobile-center mtop30">
+                    <ul class="noListStyle socialIcons">
+                        <li>
+                            <a href="mailto:hello@wofemtech.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/wofemtech">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/wofemtecg/">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/20348102/admin/">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/wofemtechinc">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>    
+            </div>
+            <div class="row align-items-center  pt50  footer-copy-right">
+                <div class="col-lg-6 col-sm-6 mobile-center fontWhite mtop30 font16">
+                    <h2>Waterloo, Canada</h2>
+                </div>
+                <div class="col-lg-6 col-sm-6 text-right mobile-center mtop30 font16 ">
+                    <p>Copyright 2020</p>
+                </div>    
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--Shopping Cart HTML -->
+<!-- <div class="shopping-cart-wrapper">
+    <div class="shopping-cart">
+            <div class="cart-title">Shopping Cart <span class="close-btn"><svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg" class="heading-icon"><path d="M1 1l10 10m0-10L1 11" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>  
+            <div class="cart-content" id="emptycart" style="display: none;">
+                <p>You don't have any items in your cart.</p>
+            </div>
+            <div class="cart-content" id="cart">
+                
+                <p>PlanName</p>
+                <p id="cplanname"></p>
+                <p id="cplan"></p>
+                <p id="camount"></p>
+                <p id="cquantity"></p>
+                <p><button class="btn btn-danger" id="remove">Remove</button></p>
+                <p><button class="btn btn-success"  id="checkout">Checkout</button></p>
+                
+            </div>
+    </div>
+</div> -->
+
+
+<!--Shopping Cart HTML New-->
+    <div class="shopping-cart-wrapper">
+        <div class="shopping-cart">
+            <div class="cart-title">Shopping Cart <span class="close-btn"><svg width="12" height="12" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" class="heading-icon">
+                        <path d="M1 1l10 10m0-10L1 11" stroke="#000" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg></span></div>
+            
+            {% if pname and pdescription and pamount and pinterval %}
+            <div class="cart-content" id="cart">
+                <div class="col-md-12 pl-0">
+                    <div class="row">
+                        <div class="col col-4 col-md-3 col-lg-3">
+                            <div class="placeholder-image">
+                                <div class="figure__placeholder-wrapper">
+                                    <div class="figure__placeholder-bg">
+
+                                    </div>
+                                    <!-- <svg data-v-97c4f9c2="" width="40px" height="40px"
+                                        xmlns="http://www.w3.org/2000/svg" class="figure__placeholder-icon">
+                                        <use xlink:href="#membership-icon"
+                                            style="--background-fill:transparent; --icon-fill:#2abf6f;"></use>
+                                    </svg> -->
+                                    <img src="{{pimage}}" width="40px" height="40px" class="figure__placeholder-wrapper">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-8 col-md-9 col-lg-9 font14">
+                            <div class="row">
+                                <div class="col col-6 col-md-7">
+                                    <strong class="">
+                                        <a href="#!">
+                                            {% if pname %}
+                                            <p id="cplanname">{{pname}}</p>
+                                            {% endif %}
+                                        </a>
+                                    </strong>
+                                </div>
+                                <div class="col col-6 col-md-5 text-right">
+                                    <p id="camount">
+                                       CA$ {{pamount}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col cart__list-details mt-2">
+                                    <p id="camount">Billed : $ CA {{pamount}} / {{pinterval}}</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-1 mb-4 ">
+                                <!-- <div class="col col-6 col-md-6 font14"> -->
+                                    <!-- <div class="popup-value d-flex border">
+                                        <button class="btn btn-light border-0 rounded-0">
+                                            -
+                                        </button>
+                                        <input type="text" placeholder="0" value="1"
+                                            class="total-item border-0 rounded-0">
+                                        <button class="btn btn-light border-0 rounded-0">
+                                            +
+                                        </button>
+                                    </div> -->
+                                <!-- </div> -->
+                                <div class="col col-6 col-md-5 pr-0 ml-2 text-right ">
+                                    <a type="button" class="btn-link" id="remove">Remove</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="border-top"></div>
+                </div>
+                <div class="col-md-12 pl-0 font14">
+                    <div class="row  my-4">
+                        <div class="col col-6 col-md-7">
+                            <strong class="">
+                                <a href="#!">
+                                    <p>Subtotal</p>
+                                </a>
+                            </strong>
+                        </div>
+                        <div class="col col-6 col-md-5 text-right">
+                            <p>
+                             CA  $  {{pamount}}
+                            </p>
+                        </div>
+
+                        <div class="col mt-2">
+                            <a type="button" class="btn-link addCouponCode">+ Add a coupon code</a>
+                        </div>
+                    </div>
+                    <div class="row  my-4 couponCode">
+                        <div class="col col-6 col-md-7">
+                            <input type="text" placeholder="Coupon Code">
+                        </div>
+                        <div class="col col-6 col-md-5 text-right">
+                           <a href="#!" class="btn-link"> <b>Apply</b> </a>
+                        </div>
+                    </div>
+                    <div class="border-top"></div>
+                </div>
+            </div>
+            <div class="footing">
+                <div class="col-md-12 pl-0">
+                    <a href="/payment">
+                    <button class="btn btn-success btn-lg btn-block rounded-0 py-2 " id="chekout">
+                        Continue to chekout
+                    </button>
+                    </a>
+                    <!-- <button class="btn btn-dark btn-lg btn-block rounded-pill">
+                        Buy with google pay
+                    </button> -->
+                </div>
+            </div>
+            {% else %}
+            <div class="cart-content" id="emptycart" >
+                <p>You don't have any items in your cart.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+<script type="text/javascript">
+
+    
+    // const buy_now_button = document.querySelector('#checkout')
+
+    //     buy_now_button.addEventListener('click', event => {   
+
+    //       // fetch('/checkout/?quantity=12')
+    //       fetch('/checkout/')
+    //       .then((result) => { return result.json() })
+    //       .then((data) => {
+    //         var stripe = Stripe(data.stripe_public_key);
+
+    //         stripe.redirectToCheckout({
+    //         // Make the id field from the Checkout Session creation API response
+    //         // available to this file, so you can provide it as parameter here
+    //         // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+    //           sessionId: data.session_id
+    //         }).then(function (result) {
+    //           // If `redirectToCheckout` fails due to a browser or network
+    //           // error, display the localized error message to your customer
+    //           // using `result.error.message`.
+    //         });
+    //       }) 
+    //     })
+
+
+    function cart(){
+
+    //     cplaname = sessionStorage.getItem("planname");
+    //     cplan = sessionStorage.getItem('plan');
+    //     cplanamount = sessionStorage.getItem('planamount');
+    //     cquantity = sessionStorage.getItem('quantity');
+
+    //     if (cplaname && cplan && cplanamount && cquantity){
+        
+
+    //     $('#cplanname').text(cplaname);
+    //     $('#cplan').text(cplan);
+    //     $('#camount').text(cplanamount);
+    //     $('#cquantity').text(cquantity);
+
+    // } else{
+    //     $('#emptycart').css('display','block');
+    //     $('#cart').css('display','none');
+    //     $('.footing').css('display','none');
+    // }
+
+    }
+    $(document).ready(function(){
+
+       
+
+    $('#remove').click(function(){
+        $.ajax({
+            url : "{% url 'wofemtech:clearcart' %}",
+            type : 'get',
+            success: function(data){
+                console.log(data);
+                location.reload();
+            },
+        });
+        
+    });
+
+
+
+    $(".plan1").change(function () {
+        // alert($(this).val());
+        var text = 'Join/Renew'
+        var price = $(this).val();
+        console.log(price);
+        var selectedText = $(this).find("option:selected").text();
+        var result = text + '   ' + selectedText;
+        $('.amount').text(result);
+        $('.plan_id').text(price);
+        console.log(result);
+
+        
+    });
+
+   
+
+    $(".amount").click(function(){
+        var plan_id = $('#plan_id').text();
+        var product_id = $('#product_id').text();
+        console.log(plan_id,product_id);
+
+        $.ajax({
+            url : "{% url 'wofemtech:cart' %}" + "?plan_id=" + plan_id + "&product_id=" + product_id,
+            type : 'get',
+            success: function(data){
+                console.log(data);
+                location.reload()
+            },
+        });
+
+       $.fancybox.close();
+       location.reload();
+       // cart();
+       // $(".shopping-cart-wrapper").toggleClass("active");
+       // $(".shopping-cart").toggleClass("active"); 
+
+
+        
+    
+    });
+
+
+    $("#chekout").click(function(){
+    });
+
+    
+
+});
+</script>
+</body>
+</html>
+{% endwith %}

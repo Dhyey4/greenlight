@@ -20,6 +20,13 @@ vendor/bundle
 # Ignore production paths.
 /db/production
 /db/production-postgres
+/db/*
+db/*
+db
+
+/__pycache__/*
+__pycache__/*
+__pycache__
 
 # Ignore all logfiles and tempfiles.
 /log/*

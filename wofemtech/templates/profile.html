@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Profile
+{% endblock title %}
+{% block content %}
+<style type="text/css">
+  .tabcontent{
+    display: none;
+  }
+</style>
+
+
+    <div class="wrapper">
+
+
+      
+
+      <div class="container pt-6">
+  
+<div class="row mt-2">
+    <div class="col-12">
+      <p class="subtitle">Profile</p>
+    </div>
+</div>
+
+<hr class="mt-0">
+
+
+  <div class="row">
+    <div class="col-lg-3 mb-4">
+      
+<div class="list-group list-group-transparent mb-0">
+  <a class="list-group-item list-group-item-action dropdown-item  tablinks" onclick="openPage('account', this)" id="defaultOpen">
+    <span class="icon mr-3"><i class="fa fa-user"></i></span>Account Info
+</a>    <a class="list-group-item list-group-item-action dropdown-item tablinks" onclick="openPage('Password', this)">
+      <span class="icon mr-3"><i class="fa fa-key"></i></span>Password
+</a>  <!-- <a class="list-group-item list-group-item-action dropdown-item " href="/b/u/gl-fghezbwbfmxy/delete_account">
+    <span class="icon mr-3"><i class="fa fa-trash-alt"></i></span>Delete Account
+</a> --></div>
+
+    </div>
+
+    <div class="col-lg-9">
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div id="account" class="setting-view card tabcontent">
+  <div class="card-body p-6">
+    <div class="card-title text-primary">
+      <div class="form-group">
+        
+<div class="row mt-2">
+    <div class="col-12">
+      <p class="subtitle">Update your Account Info </p>
+      <br>
+    </div>
+</div>
+
+<hr class="mt-0">
+
+      </div>
+    </div>
+
+    
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6 mb-4">
+        <label class="form-label" for="user_name">Full name</label>
+        <div class="input-icon">
+          <input class="form-control " placeholder="Full name" type="text" value="{{request.user.name}}" name="user[name]" id="user_name" />
+        </div>
+      </div>
+
+      <div class="col-sm-6 mb-4">
+        <label class="form-label" for="user_email">Email</label>
+        <div class="input-icon">
+          <input class="form-control " placeholder="Email" type="email" value="{{request.user.email}}" name="" id="user_email" />
+        </div>
+      </div>
+    </div>
+    
+    <label class="form-label" for="user_provider">Provider</label>
+    <!-- <input class="form-control" readonly="readonly" type="text" value="{{request.user.provider}}" name="" id="user_provider" /> -->
+    <input class="form-control" readonly="readonly" type="text" value="Wofemtech" name="" id="user_provider" />
+    <br>
+    
+    <label class="form-label" for="user_language">Language</label>
+    <select class="form-control custom-select" name="user[language]" id="user_language">
+      <option selected="selected" value="default">&lt;&lt;&lt;&lt; Default (browser language) &gt;&gt;&gt;&gt;</option>
+      <option value="da">Dansk</option>
+      <option value="de_DE">Deutsch (Deutschland)</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="es_MX">Español (México)</option>
+      <option value="eu">Euskara</option>
+      <option value="fr">Français</option>
+      <option value="gl">Galego</option>
+      <option value="it">Italiano</option>
+      <option value="lv">Latviešu</option>
+      <option value="hu_HU">Magyar</option>
+      <option value="nl">Nederlands</option>
+      <option value="nb">Norsk (bokmål)</option>
+      <option value="pl_PL">Polski</option>
+      <option value="pt">Português</option>
+      <option value="pt_BR">Português (Brasil)</option>
+      <option value="sk_SK">Slovenčina (Slovakia)</option>
+      <option value="sv_SE">Svenska</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="vi_VN">Tiếng Việt</option>
+      <option value="tr">Türkçe</option>
+      <option value="tr_TR">Türkçe</option>
+      <option value="cs">Čeština</option>
+      <option value="el">Ελληνικά</option>
+      <option value="bg">Български</option>
+      <option value="ru">Русский</option>
+      <option value="uk">Українська</option>
+      <option value="hy">Հայերեն</option>
+      <option value="ar">العربية</option>
+      <option value="fa_IR">فارسی</option>
+      <option value="hi_IN">हिन्दी</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="th">ภาษาไทย</option>
+      <option value="zh_CN">中文（中国）</option>
+      <option value="zh_TW">中文（台灣）</option>
+      <option value="ja_JP">日本語</option></select>
+      <br><br>
+
+      <label class="form-label" for="user_provider">Current Plan</label>
+      {% if plan_name and plan_interval %}
+      <input class="form-control" readonly="readonly" type="text" value="{{plan_name}} ( {{plan_interval|title}}ly )" name="" id="plan_interval" />
+      {% else %}
+      <input class="form-control" readonly="readonly" type="text" value="No Active Plan" name="" id="plan_interval" />
+      {% endif %}
+      <br><br>
+
+      <label class="form-label" for="user_provider">Plan Expiry Date</label>
+      {% if plan_expiry %}
+      <input class="form-control" readonly="readonly" type="text" value="{{plan_expiry}}" name="" id="plan_expiry" />
+      {% else %}
+      <input class="form-control" readonly="readonly" type="text" value="No Active Plan" name="" id="plan_expiry" />
+      {% endif %}
+      <br>
+      <input type="text" name="sub_id" id="sub_id" value="{{sub_id}}" hidden="">
+      
+    </div>
+  </div>
+  <div class="card-footer">
+    <!-- <input type="submit" name="commit" value="Update" class="btn btn-primary float-right ml-4" data-disable-with="Update" /> -->
+    <!-- <br> -->
+    <button class="btn btn-success float-right" id="update_profile">Update </button>
+    {% if plan_name and plan_interval and plan_expiry and remaining_plan_days > 2 %}
+    <button class="btn btn-danger" id="cancel_subscription">Cancel Subscription</button>
+    {% elif remaining_plan_days <= 2  %}
+    <a href="/pricing" target="_blank"><button class="btn btn-danger" id="new_subscription">Renew Plan</button></a>
+    {% else %}
+    <a href="/pricing" target="_blank"><button class="btn btn-danger" id="new_subscription">Buy Plan</button></a>
+    {% endif %}
+  </div>
+  </div>
+<!-- </div> -->
+
+<div id="Password" class="tabcontent">
+<p>{{msg}}</p>
+<div class="col-lg-12">
+      
+<div id="password" class="setting-view card">
+  <div class="card-body p-6">
+    <div class="card-title text-primary">
+      <div class="form-group">
+        
+<div class="row mt-2">
+    <div class="col-12">
+      <p class="subtitle">Change your Password</p>
+    </div>
+</div>
+<br>
+<hr class="mt-0">
+
+      </div>
+    </div>
+
+    
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-8">
+        <label class="form-label" for="user_password">Old Password</label>
+        <input class="form-control " autocomplete="off" required="required" type="password" name="user[password]" id="user_password">
+        <br>
+        <label class="form-label" for="user_new_password">New Password</label>
+        <input class="form-control " autocomplete="off" required="required" type="password" name="user[new_password]" id="user_new_password">
+        <br>
+        <label class="form-label" for="user_password_confirmation">New Password Confirmation</label>
+        <input class="form-control " autocomplete="off" required="required" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-success float-right" id="update_pass">Update</button>
+    <!-- <input type="submit" name="commit" value="Update" class="btn btn-primary float-right" data-disable-with="Update"> -->
+  </div>
+
+  </div>
+</div>
+    </div>
+</div>
+
+    </div>
+  </div>
+</div>
+<br><br>
+    
+<script type="text/javascript">
+    function openPage(pageName, elmnt) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+        }
+        document.getElementById(pageName).style.display = "block";
+    }
+    document.getElementById("defaultOpen").click();
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('#cancel_subscription').click(function(){
+      var sub_id = $('#sub_id').val()
+
+      if (sub_id != ''){
+
+      $.ajax({
+        url : '/api/cancel_subscription/',
+        type : 'post',
+        data : {'sub_id':sub_id,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+
+        success: function(data){
+          if (data.code == 200){
+            alert(data.msg)
+            location.reload();
+          }
+          if (data.code == 201){
+            alert(data.msg)
+            location.reload();
+          }
+        },
+        
+      });
+      // location.reload();
+    }
+
+    else{
+      alert("You Don't Have Active Plan..")
+    }
+    });
+
+
+    $('#update_profile').click(function(){
+      var name = $('#user_name').val();
+      var email = $('#user_email').val();
+      var language = $('#user_language').val();
+
+      console.log(name, email, language)
+
+      $.ajax({
+        url : "/api/update_profile/",
+        type : 'post',
+        data : {'name':name,'email':email,'language':language,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+
+        success: function(data){
+          if (data.code == 200){
+            location.reload();
+          }
+        },
+      });
+    });
+
+    $("#update_pass").click(function(){
+      var old_pass = $('#user_password').val();
+      var new_pass = $('#user_new_password').val();
+      var new_conf_pass = $('#user_password_confirmation').val();
+
+      console.log(old_pass , new_pass, new_conf_pass);
+      if (old_pass == ''|| new_pass == '' ||new_conf_pass == ''){
+        alert("fill all the field to continue..");
+      };
+
+      if(new_pass != new_conf_pass){
+        alert("New Password and New Password Confirmation fields are not matching..")
+      }
+
+      else{
+        // alert("password match")
+        $.ajax({
+          url : "/api/password_change/",
+          type : 'post',
+          data : {"old_pass":old_pass,"new_pass":new_pass,'csrfmiddlewaretoken': '{{ csrf_token }}'},
+
+          success: function(data){
+            if (data.code == 200){
+              location.reload();
+            }
+          },
+
+        });
+      }
+  });
+});
+</script>
+
+{% endblock %}

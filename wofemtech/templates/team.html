@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Teams
+{% endblock title %}
+{% block content %}
+<!-- Banner Section -->
+<section class="banner-section p100-0" style="background-image: url(/static/images/Team_banner.png);">
+    <div class="container">
+        <div class="p40-0">
+            <div class="banner-content">
+                <h1>Meet our dynamic <br> team behind <br> Wofemtech</h1>
+            </div>
+            <div class="pt30">
+                {% if request.user.is_authenticated %}
+            <a href="{{link}}" class="button btn-green">Create Meetings!</a>
+            {% else %}
+            <a href="/register" class="button btn-green">Sign-Up Today!</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-member-section p50-0">
+    <div class="container"> 
+        <div class="team-members">
+            <div class="team-card">
+                <div class="member-image">
+                     <img src="/static/images/Team_member_01.jpg">   
+                </div> 
+                <div class="member-detail font16">
+                    <h2>Aminka Belvitt - Founder & CEO</h2>
+                    <p>A visionary and industry leader creating equitable solutions to design more efficient and responsive technology & communities.</p>
+                    <div class="pt30">
+                        <a href="http://www.aminka.belvitt.com/" target="_blank" class="button btn-green">Learn more</a>
+                    </div>
+                </div>   
+            </div> 
+            <div class="team-card">
+                <div class="member-image">
+                    <img src="/static/images/Team_member_02.png">   
+               </div> 
+               <div class="member-detail font16">
+                   <h2>Komi Sodoke PhD. - CTO</h2>
+                   <p>Doctor of Cognitive Computer Science, Professor at Valleyfield College, and at UQAM in Montreal, Canada.</p>
+                   <div class="pt30">
+                       <a href="https://www.linkedin.com/in/komi-sodoke-4ab1151a/" target="_blank" class="button btn-green">Learn more</a>
+                   </div>
+               </div>  
+            </div>    
+        </div>
+    </div>
+</section>
+<!-- Two Column Section -->
+<section class="p50-0">
+    <div class="container">
+            <div class="row align-items-center">
+            <div class="col-lg-6 col-sm-6 ">
+                <a href="https://veroniquecloutier.com/">
+                    <img src="/static/images/VERO Magazine.png">   
+                </a>
+            </div> 
+            <div class="col-lg-5 col-sm-6 offset-lg-1 mtop30">
+                <h6 class="text-uppercase"><b>PRESS FEATURE</b></h6>
+                <h2>Véro Magazine</h2>
+                <p>Aminka Belvitt, Wofemtech CEO featured in the Spring Edition of Véro Magazine discussing the future of work, the role virtual meetings will empower and create new employment opportunities for women.</p>
+                <div class="pt30">
+                    <a href="https://veroniquecloutier.com/" target="_blank" class="button btn-green">Learn more</a>
+                </div>
+            </div>
+            </div>   
+    </div>
+</section>
+
+{% endblock %}

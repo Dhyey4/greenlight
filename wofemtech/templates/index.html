@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Home
+{% endblock title %}
+{% block content %}
+<!-- Banner Section -->
+<section class="banner-section p60-0" style="background-image: url(/static/images/banner_image.png);">
+    <div class="container">
+        <div class="banner-content">
+            <h1>A New Way To <br> Meeting Virtually. Start <br> engaging with your clients.</h1>
+        </div>
+        <div class="pt30">
+            {% if request.user.is_authenticated %}
+            <a href="{{link}}" class="button btn-green">Create Meetings!</a>
+            {% else %}
+            <a href="/register" class="button btn-green">Sign-Up</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- Two Column Section -->
+<section class="p50-0 altBg">
+    <div class="container">
+            <div class="row align-items-center">
+            <div class="col-lg-5 col-sm-6 ">
+                <h6 class="text-uppercase"><b>Our mission</b></h6>
+                <h2>A New Virtual Alternative</h2>
+                <p>To provide innovative virtual solutions to amplify the skill sets and voices of purpose driven entrepreneurs, creatives and organizations worldwide. Our virtual collective empowers people through the connectivity of technology and learning to connect, create and build community.</p>
+                </div>
+                <div class="col-lg-6 col-sm-6 offset-lg-1 mtop30">
+                    <a href="##">
+                        <img src="/static/images/Wofemtech Platform Tablets.png">   
+                    </a>
+                </div>   
+            </div>   
+    </div>
+</section>
+<section class="p50-0">
+    <div class="container">
+            <div class="row align-items-center">
+            <div class="col-lg-6 col-sm-6 ">
+                <img src="/static/images/WOFEM2.png">   
+            </div> 
+            <div class="col-lg-5 col-sm-6 offset-lg-1 mtop30">
+                <h6 class="text-uppercase"><b>OUR PLATFORM</b></h6>
+                <h2>Virtual Solutions</h2>
+                <p>Wofemtech is a tech-startup company <span style="color:#61a754">founded in 2017</span>, by <a style="color:#000000;" href="https://www.aminkabelvit.com" target="_blank" rel="noopener noreferrer">Aminka Belvitt</a>. <br><br>Recently released on April 5, 2020, Wofemtech video conferencing platform uses cloud computing technology to provide online learning and web conferencing services. <br><br>Wofemtech provides innovative solutions for professionals, <span style="color:#61a754">entrepreneurs and small-medium</span> size organizations to create digital courses, <span style="color:#61a754">webinars, virtual summits, </span>and meetings to connect and build community</p>
+            </div>
+            </div>   
+    </div>
+</section>
+<section class="p50-0">
+    <div class="container">
+            <div class="row align-items-center">
+            <div class="col-lg-5 col-sm-6 offset-lg-0 font16">
+                <h2>Video Conference Features</h2>
+                <p>Our cloud-based web video conferencing platform features many <em style="color:#61a754">functions designed to optimize</em> the host virtual experience.</p>
+                <div class="pt30">
+                    <a href="http://meeting.wofemtech.com/b" target="_blank" class="button btn-green">Learn more</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 offset-lg-1 mtop30">
+                <img src="/static/images/WOFEM20.png">   
+            </div> 
+            </div>   
+    </div>
+</section>
+<section class="p50-0">
+    <div class="container">
+            <div class="row align-items-center">
+            <div class="col-lg-6 col-sm-6 offset-lg-0 ">
+                <img src="/static/images/WOFEM22.png">   
+            </div> 
+            <div class="col-lg-5 col-sm-6 offset-lg-1 font16 mtop30">
+                <h6 class="text-uppercase"><b>CREATE YOUR OWN WORKSHOPS</b></h6>
+                <h2>Webinar Features</h2>
+                <p>Create meeting rooms to invite your guests to join a virtual workshop or conference with moderator and hosts control functions.</p>
+                <div class="pt30">
+                    <a href="http://meeting.wofemtech.com/b" target="_blank" class="button btn-green">Learn more</a>
+                </div>
+            </div>
+            
+            </div>   
+    </div>
+</section>
+<section class="what-we-section p50-0">
+    <div class="container">
+        <div class="img-wrapper">
+            <img src="/static/images/what_we_can.png">
+        </div>
+    </div>
+</section>
+<!-- Business Meeting Plans -->
+<section class="p50-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Business Meeting Plans</h2>
+            </div>
+        </div>
+        <div class="business-slider pt15">
+            <div>
+                <div class="business-card text-center">
+                    <div class="card-placeholder">
+                    <svg id="membership-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M23 15a1 1 0 100 2v-2zm10 2a1 1 0 100-2v2zm-10 2a1 1 0 100 2v-2zm7 2a1 1 0 100-2v2zm-7 2a1 1 0 100 2v-2zm8 2a1 1 0 100-2v2zm-15.392.51a1 1 0 001.585-1.22l-1.585 1.22zm-9-1.22a1 1 0 001.585 1.22l-1.585-1.22zM37 32H3v2h34v-2zM3 32c-.548 0-1-.452-1-1H0c0 1.652 1.348 3 3 3v-2zm-1-1V9H0v22h2zM2 9c0-.548.452-1 1-1V6C1.348 6 0 7.348 0 9h2zm1-1h34V6H3v2zm34 0c.548 0 1 .452 1 1h2c0-1.652-1.348-3-3-3v2zm1 1v22h2V9h-2zm0 22c0 .548-.452 1-1 1v2c1.652 0 3-1.348 3-3h-2zM23 17h10v-2H23v2zm0 4h7v-2h-7v2zm0 4h8v-2h-8v2zm-9.1-7a2 2 0 01-2 2v2a4 4 0 004-4h-2zm-2 2a2 2 0 01-2-2h-2a4 4 0 004 4v-2zm-2-2a2 2 0 012-2v-2a4 4 0 00-4 4h2zm2-2a2 2 0 012 2h2a4 4 0 00-4-4v2zm5.293 8.29c-1.184-1.539-3.173-2.59-5.293-2.59v2c1.48 0 2.891.748 3.708 1.81l1.585-1.22zM11.9 21.7c-2.12 0-4.109 1.051-5.292 2.59l1.585 1.22c.816-1.062 2.227-1.81 3.707-1.81v-2z" fill="var(--icon-fill)"></path></svg></svg>    
+                    </div>
+                    <div class="card-detail">
+                        <p class="card-title">LTE - Personal Meeting</p>
+                        <p class="card-price">CAD$20.00 - CAD$25.00</p>
+                    </div> 
+                </div>
+            </div>
+            <div>
+                <div class="business-card text-center">
+                    <div class="card-placeholder">
+                    <svg id="membership-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M23 15a1 1 0 100 2v-2zm10 2a1 1 0 100-2v2zm-10 2a1 1 0 100 2v-2zm7 2a1 1 0 100-2v2zm-7 2a1 1 0 100 2v-2zm8 2a1 1 0 100-2v2zm-15.392.51a1 1 0 001.585-1.22l-1.585 1.22zm-9-1.22a1 1 0 001.585 1.22l-1.585-1.22zM37 32H3v2h34v-2zM3 32c-.548 0-1-.452-1-1H0c0 1.652 1.348 3 3 3v-2zm-1-1V9H0v22h2zM2 9c0-.548.452-1 1-1V6C1.348 6 0 7.348 0 9h2zm1-1h34V6H3v2zm34 0c.548 0 1 .452 1 1h2c0-1.652-1.348-3-3-3v2zm1 1v22h2V9h-2zm0 22c0 .548-.452 1-1 1v2c1.652 0 3-1.348 3-3h-2zM23 17h10v-2H23v2zm0 4h7v-2h-7v2zm0 4h8v-2h-8v2zm-9.1-7a2 2 0 01-2 2v2a4 4 0 004-4h-2zm-2 2a2 2 0 01-2-2h-2a4 4 0 004 4v-2zm-2-2a2 2 0 012-2v-2a4 4 0 00-4 4h2zm2-2a2 2 0 012 2h2a4 4 0 00-4-4v2zm5.293 8.29c-1.184-1.539-3.173-2.59-5.293-2.59v2c1.48 0 2.891.748 3.708 1.81l1.585-1.22zM11.9 21.7c-2.12 0-4.109 1.051-5.292 2.59l1.585 1.22c.816-1.062 2.227-1.81 3.707-1.81v-2z" fill="var(--icon-fill)"></path></svg></svg>    
+                    </div>
+                    <div class="card-detail">
+                        <p class="card-title">LTE - Personal Meeting</p>
+                        <p class="card-price">CAD$20.00 - CAD$25.00</p>
+                    </div> 
+                </div>
+            </div>
+            <div>
+                <div class="business-card text-center">
+                    <div class="card-placeholder">
+                    <svg id="membership-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M23 15a1 1 0 100 2v-2zm10 2a1 1 0 100-2v2zm-10 2a1 1 0 100 2v-2zm7 2a1 1 0 100-2v2zm-7 2a1 1 0 100 2v-2zm8 2a1 1 0 100-2v2zm-15.392.51a1 1 0 001.585-1.22l-1.585 1.22zm-9-1.22a1 1 0 001.585 1.22l-1.585-1.22zM37 32H3v2h34v-2zM3 32c-.548 0-1-.452-1-1H0c0 1.652 1.348 3 3 3v-2zm-1-1V9H0v22h2zM2 9c0-.548.452-1 1-1V6C1.348 6 0 7.348 0 9h2zm1-1h34V6H3v2zm34 0c.548 0 1 .452 1 1h2c0-1.652-1.348-3-3-3v2zm1 1v22h2V9h-2zm0 22c0 .548-.452 1-1 1v2c1.652 0 3-1.348 3-3h-2zM23 17h10v-2H23v2zm0 4h7v-2h-7v2zm0 4h8v-2h-8v2zm-9.1-7a2 2 0 01-2 2v2a4 4 0 004-4h-2zm-2 2a2 2 0 01-2-2h-2a4 4 0 004 4v-2zm-2-2a2 2 0 012-2v-2a4 4 0 00-4 4h2zm2-2a2 2 0 012 2h2a4 4 0 00-4-4v2zm5.293 8.29c-1.184-1.539-3.173-2.59-5.293-2.59v2c1.48 0 2.891.748 3.708 1.81l1.585-1.22zM11.9 21.7c-2.12 0-4.109 1.051-5.292 2.59l1.585 1.22c.816-1.062 2.227-1.81 3.707-1.81v-2z" fill="var(--icon-fill)"></path></svg></svg>    
+                    </div>
+                    <div class="card-detail">
+                        <p class="card-title">LTE - Personal Meeting</p>
+                        <p class="card-price">CAD$20.00 - CAD$25.00</p>
+                    </div> 
+                </div>
+            </div>
+            <div>
+                <div class="business-card text-center">
+                    <div class="card-placeholder">
+                    <svg id="membership-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M23 15a1 1 0 100 2v-2zm10 2a1 1 0 100-2v2zm-10 2a1 1 0 100 2v-2zm7 2a1 1 0 100-2v2zm-7 2a1 1 0 100 2v-2zm8 2a1 1 0 100-2v2zm-15.392.51a1 1 0 001.585-1.22l-1.585 1.22zm-9-1.22a1 1 0 001.585 1.22l-1.585-1.22zM37 32H3v2h34v-2zM3 32c-.548 0-1-.452-1-1H0c0 1.652 1.348 3 3 3v-2zm-1-1V9H0v22h2zM2 9c0-.548.452-1 1-1V6C1.348 6 0 7.348 0 9h2zm1-1h34V6H3v2zm34 0c.548 0 1 .452 1 1h2c0-1.652-1.348-3-3-3v2zm1 1v22h2V9h-2zm0 22c0 .548-.452 1-1 1v2c1.652 0 3-1.348 3-3h-2zM23 17h10v-2H23v2zm0 4h7v-2h-7v2zm0 4h8v-2h-8v2zm-9.1-7a2 2 0 01-2 2v2a4 4 0 004-4h-2zm-2 2a2 2 0 01-2-2h-2a4 4 0 004 4v-2zm-2-2a2 2 0 012-2v-2a4 4 0 00-4 4h2zm2-2a2 2 0 012 2h2a4 4 0 00-4-4v2zm5.293 8.29c-1.184-1.539-3.173-2.59-5.293-2.59v2c1.48 0 2.891.748 3.708 1.81l1.585-1.22zM11.9 21.7c-2.12 0-4.109 1.051-5.292 2.59l1.585 1.22c.816-1.062 2.227-1.81 3.707-1.81v-2z" fill="var(--icon-fill)"></path></svg></svg>    
+                    </div>
+                    <div class="card-detail">
+                        <p class="card-title">LTE - Personal Meeting</p>
+                        <p class="card-price">CAD$20.00 - CAD$25.00</p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
